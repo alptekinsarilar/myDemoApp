@@ -8,12 +8,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import static org.junit.jupiter.api.Assertions.*;
-
 class AppTest {
     @Test void appHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
 
+    @Test
+    public void testValidList() {
+        ArrayList list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+        Integer number1 = 2, number2 = 9;
+        assertTrue(App.hasBetweenIntegers(list, number1, number2));
+    }
+
+    @Test
+    public void testValidListNoSuchElement() {
+        ArrayList list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+        Integer number1 = 9, number2 = 16;
+        assertFalse(App.hasBetweenIntegers(list, number1, number2));
+    }
+
+    @Test
+    public void testInvalidNumbers() {
+        ArrayList list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+        Integer number1 = 9, number2 = 6;
+        assertFalse(App.hasBetweenIntegers(list, number1, number2));
+    }
+
+    @Test
+    public void testNullList() {
+        assertFalse(App.hasBetweenIntegers(null, 0, 0));
+    }
 }
