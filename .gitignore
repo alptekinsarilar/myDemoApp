@@ -2,7 +2,6 @@
 build
 *.settings
 *.classpath
-*.class
 *.project
 bin/*
 .vscode/*
