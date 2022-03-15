@@ -33,8 +33,8 @@ public class App {
 
         post("/compute", 
              (req, res) -> {
-                System.out.println(req.queryParams("input1"));
-                System.out.println(req.queryParams("input2"));
+                System.out.println("input1: " + req.queryParams("input1"));
+                System.out.println("input2: " + req.queryParams("input2"));
     
                 String input1 = req.queryParams("input1");
                 java.util.Scanner sc1 = new java.util.Scanner(input1);
