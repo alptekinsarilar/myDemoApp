@@ -13,17 +13,10 @@ import spark.template.mustache.MustacheTemplateEngine;
 
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
         
         int port = Integer.parseInt(System.getenv("PORT"));
         port(port);
-
-        
-        System.out.println(new App().getGreeting());
 
         get("/", (req, res) -> "Welcome to my first Web Application!!!");
 
@@ -45,10 +38,17 @@ public class App {
                 java.util.Scanner sc1 = new java.util.Scanner(input1);
                 sc1.useDelimiter("[;\r\n]+");
                 java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
-                while (sc1.hasNext())
-                {
-                int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
-                inputList.add(value);
+                while (sc1.hasNext()) {
+                    try { 
+                        int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
+                        inputList.add(value);
+                    } catch (NumberFormatException nfe) {
+                        sc1.close();
+                        Map<String, Boolean> map = new HashMap<String, Boolean>();
+                        map.put("result", false);
+                        return new ModelAndView(map, "compute.mustache");
+                    }
+                    
                 }
                 sc1.close();
                 System.out.println(inputList);
